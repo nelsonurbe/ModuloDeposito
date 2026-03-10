@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- MENÚS -->
+        <menuitem id="menu_deposito_root"
+                  name="Depósitos"
+                  sequence="10"
+                  web_icon="deposito_management,static/description/icon.png"/>
+
+        <menuitem id="menu_deposito_items_parent"
+                  name="Asignación de Items"
+                  parent="menu_deposito_root"
+                  sequence="20"/>
+
+        <menuitem id="menu_action_register_items"
+                  name="Asignar Items"
+                  parent="menu_deposito_items_parent"
+                  action="action_deposito_item_main"
+                  sequence="1"/>
+
+        <menuitem id="menu_deposito_item_assign_wizard"
+          name="Asignación Directa"
+          parent="menu_deposito_items_parent"
+          action="action_deposito_item_assign_wizard"
+          sequence="2"/>
+
+        <menuitem id="menu_deposito_config"
+                  name="Configuración"
+                  parent="menu_deposito_root"
+                  sequence="30"/>
+
+        <!-- Menú para el log, antes de Registro de Depósitos -->
+        <menuitem id="menu_action_deposito_item_log"
+                  name="Log"
+                  parent="menu_deposito_config"
+                  action="action_deposito_item_log"
+                  sequence="0"/>
+
+        <menuitem id="menu_action_register_depositos"
+                  name="Registro de Depósitos"
+                  parent="menu_deposito_config"
+                  action="action_deposito_bodega"
+                  sequence="1"/>
+
+        <menuitem id="menu_action_formulario_items"
+                  name="Registro de Items"
+                  parent="menu_deposito_config"
+                  action="action_deposito_item_formulario"
+                  sequence="2"/>
+    </data>
+</odoo>

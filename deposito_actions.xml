@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+         <!-- Acción para el log -->
+        <record id="action_deposito_item_log" model="ir.actions.act_window">
+            <field name="name">Log</field>
+            <field name="res_model">deposito.item.log</field>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_deposito_item_log_tree"/>
+            <field name="search_view_id" ref="view_deposito_item_log_search"/>
+            <field name="help">Aquí puedes consultar el historial de movimientos de los items.</field>
+        </record>
+        <!-- Acción: vista árbol + formulario para Registro de Items -->
+        <record id="action_deposito_item_formulario" model="ir.actions.act_window">
+            <field name="name">Vista Registro de Items</field>
+            <field name="res_model">deposito.item</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('view_deposito_item_registro_tree')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('view_deposito_item_form')})]"/>
+        </record>
+
+        <!-- ACCIONES: deposito.bodega -->
+        <record id="action_deposito_bodega" model="ir.actions.act_window">
+            <field name="name">Registro de Depósitos</field>
+            <field name="res_model">deposito.bodega</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help">Aquí puedes registrar y consultar los depósitos físicos disponibles.</field>
+        </record>
+
+        <!-- ACCIONES: deposito.item -->
+        <record id="action_deposito_item_main" model="ir.actions.act_window">
+            <field name="name">Asignar Items</field>
+            <field name="res_model">deposito.item</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('view_deposito_item_asignacion_tree')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('view_deposito_item_asignacion_form')})]"/>
+            <field name="context">{'group_by': 'status'}</field>
+        </record>
+
+        <!-- ACCIÓN SERVIDOR: desasignar item -->
+        <record id="action_desasignar_item_server" model="ir.actions.server">
+            <field name="name">Desasignar Item</field>
+            <field name="model_id" ref="model_deposito_item"/>
+            <field name="binding_model_id" ref="model_deposito_item"/>
+            <field name="binding_type">action</field>
+            <field name="state">code</field>
+            <field name="code">action = records.action_desasignar_item()</field>
+        </record>
+
+        <record id="action_asignar_item_server" model="ir.actions.server">
+            <field name="name">Asignar Item</field>
+            <field name="model_id" ref="model_deposito_item"/>
+            <field name="binding_model_id" ref="model_deposito_item"/>
+            <field name="binding_type">action</field>
+            <field name="state">code</field>
+            <field name="code">action = records.action_asignar_item()</field>
+        </record>
+
+        <!-- Acción para abrir el wizard -->
+        <record id="action_deposito_item_assign_wizard" model="ir.actions.act_window">
+            <field name="name">Asignar Items</field>
+            <field name="res_model">deposito.item.assign.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

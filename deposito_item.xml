@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- VISTAS: deposito.bodega -->
+        <record id="view_tree_deposito_bodega" model="ir.ui.view">
+            <field name="name">deposito.bodega.tree</field>
+            <field name="model">deposito.bodega</field>
+            <field name="arch" type="xml">
+                <tree string="Depósitos">
+                    <field name="name"/>
+                    <field name="location_desc"/>
+                    <field name="maps_url"/>
+                </tree>
+            </field>
+        </record>
+        <record id="view_form_deposito_bodega" model="ir.ui.view">
+            <field name="name">deposito.bodega.form</field>
+            <field name="model">deposito.bodega</field>
+            <field name="arch" type="xml">
+                <form string="Depósito / Bodega">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="location_desc"/>
+                            <field name="maps_url"/>
+                            <field name="latitude"/>
+                            <field name="longitude"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- VISTAS: deposito.item -->
+        <record id="view_deposito_item_tree" model="ir.ui.view">
+            <field name="name">deposito.item.tree</field>
+            <field name="model">deposito.item</field>
+            <field name="arch" type="xml">
+               <tree string="Items">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="serial_number"/>
+                    <field name="deposito_id"/>
+                    <field name="employee_id"/>
+                    <field name="status"/>
+                    <button name="action_desasignar_item" type="object" string="Desasignar" class="btn-secondary" attrs="{'invisible': [('status', '=', 'no_asignado')]}"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_deposito_item_form" model="ir.ui.view">
+            <field name="name">deposito.item.form</field>
+            <field name="model">deposito.item</field>
+            <field name="arch" type="xml">
+                <form string="Item">
+                    <sheet>
+                        <group>
+                           <group>
+                                <field name="name"/>
+                                <field name="condition" required="1"/>
+                                <field name="code"/>
+                                <field name="serial_number"/>
+                                <field name="description"/>
+                            </group>
+                            <group>
+                                <field name="deposito_id"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- Vista tree del log -->
+        <record id="view_deposito_item_log_tree" model="ir.ui.view">
+            <field name="name">deposito.item.log.tree</field>
+            <field name="model">deposito.item.log</field>
+            <field name="arch" type="xml">
+                <tree string="Log de Movimientos">
+                    <field name="date"/>
+                    <field name="item_name"/>
+                    <field name="employee_name"/>
+                    <field name="action_type"/>
+                    <field name="quien_realizo_accion" string="Quién realizó la acción"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Search view para filtro por usuario -->
+        <record id="view_deposito_item_log_search" model="ir.ui.view">
+            <field name="name">deposito.item.log.search</field>
+            <field name="model">deposito.item.log</field>
+            <field name="arch" type="xml">
+                <search string="Buscar Movimientos">
+                    <field name="quien_realizo_accion" string="Usuario"/>
+                    <field name="item_name" string="Ítem"/>
+                    <field name="employee_name" string="Empleado"/>
+                    <field name="action_type" string="Tipo"/>
+                    <field name="date" string="Fecha"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- VISTA: Registro de Items (Tree) -->
+        <record id="view_deposito_item_registro_tree" model="ir.ui.view">
+            <field name="name">deposito.item.registro.tree</field>
+            <field name="model">deposito.item</field>
+            <field name="arch" type="xml">
+                <tree string="Registro de Items">
+                    <field name="name"/>
+                    <field name="description"/>
+                    <field name="code"/>
+                    <field name="serial_number"/>
+                    <field name="deposito_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- VISTA: Asignacion de Items (Tree) -->
+        <record id="view_deposito_item_asignacion_tree" model="ir.ui.view">
+            <field name="name">deposito.item.asignacion.tree</field>
+            <field name="model">deposito.item</field>
+            <field name="arch" type="xml">
+                <tree string="Asignación de Items" create="0" >
+                    <field name="name"/>
+                    <field name="assigned_condition" string="Condición al Asignar" readonly="1"/>
+                    <field name="code"/>
+                    <field name="serial_number"/>
+                    <field name="assigned_deposito"/>
+                    <field name="employee_id"/>
+                    <field name="status"/>
+                    <button name="action_desasignar_item" type="object" string="Desasignar" class="btn-secondary" attrs="{'invisible': [('status', '=', 'no_asignado')]}"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_deposito_item_asignacion_form" model="ir.ui.view">
+            <field name="name">deposito.item.asignacion.form</field>
+            <field name="model">deposito.item</field>
+            <field name="arch" type="xml">
+                <form string="Asignación de Item">
+                    <sheet>
+                        <group>
+                            <group>
+                                <!-- CAMPOS ELIMINADOS: item_id, item_code, item_serial, item_deposito -->
+                                <field name="assigned_condition" string="Condición al Asignar" readonly="1"/>
+                                <field name="code"/>
+                                <field name="serial_number"/>
+                                <field name="assigned_deposito"/>
+                                <field name="description"/>
+                            </group>
+                            <group>
+                                <field name="employee_id"/>
+                                <field name="status" readonly="1"/>
+                                <field name="last_assignment_datetime" readonly="1"/>
+                                <field name="last_unassignment_datetime" readonly="1"/>
+                            </group>
+                        </group>
+                        <footer>
+                            <button name="action_asignar_item"
+                                    type="object"
+                                    string="Asignar"
+                                    class="btn-primary"
+                                    attrs="{'invisible': [('status', '=', 'asignado'), ('employee_id', '=', False)]}"/>
+                            <button name="action_desasignar_item"
+                                    type="object"
+                                    string="Desasignar"
+                                    class="btn-secondary"
+                                    attrs="{'invisible': [('status', '=', 'no_asignado')]}"/>
+                        </footer>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- Vista del wizard -->
+        <record id="view_deposito_item_assign_wizard_form" model="ir.ui.view">
+            <field name="name">deposito.item.assign.wizard.form</field>
+            <field name="model">deposito.item.assign.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Asignación de Item">
+                    <sheet>
+                        <group>
+                            <field name="item_id" options="{'no_create': True}" required="1"/>
+                        </group>
+                        <group>
+                            <field name="employee_id" required="1"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="action_assign" type="object" string="Asignar" class="btn-primary"/>
+                        <button string="Cancelar" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>
