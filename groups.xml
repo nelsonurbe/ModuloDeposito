@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Grupo Usuario DEPOSITOS -->
+        <record id="group_user" model="res.groups">
+            <field name="name">Usuario DEPOSITOS</field>
+            <field name="category_id" ref="base.module_category_services"/>
+        </record>
+        <!-- Grupo Manager DEPOSITOS -->
+        <record id="group_manager" model="res.groups">
+            <field name="name">Manager DEPOSITOS</field>
+            <field name="category_id" ref="base.module_category_services"/>
+            <field name="implied_ids" eval="[(4, ref('deposito_management.group_user'))]"/>
+        </record>
+    </data>
+</odoo>

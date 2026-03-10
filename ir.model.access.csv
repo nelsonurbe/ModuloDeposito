@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_deposito_bodega_user,access.deposito.bodega.user,model_deposito_bodega,deposito_management.group_user,1,1,1,1
+access_deposito_item_user,access.deposito.item.user,model_deposito_item,deposito_management.group_user,1,1,1,1
+access_deposito_bodega_manager,access.deposito.bodega.manager,model_deposito_bodega,deposito_management.group_manager,1,1,1,1
+access_deposito_item_manager,access.deposito.item.manager,model_deposito_item,deposito_management.group_manager,1,1,1,1
+access_deposito_item_log_user,access.deposito.item.log.user,model_deposito_item_log,deposito_management.group_user,1,1,0,0
+access_deposito_item_log_manager,access.deposito.item.log.manager,model_deposito_item_log,deposito_management.group_manager,1,1,1,1
+access_deposito_item_assign_wizard_user,access.deposito.item.assign.wizard.user,model_deposito_item_assign_wizard,deposito_management.group_user,1,1,0,0
+access_deposito_item_assign_wizard_manager,access.deposito.item.assign.wizard.manager,model_deposito_item_assign_wizard,deposito_management.group_manager,1,1,1,1
