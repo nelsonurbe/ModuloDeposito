@@ -1,0 +1,34 @@
++--------------------+       +--------------------+
+|     depositos      |       |     usuarios       |
++--------------------+       +--------------------+
+| PK id              |       | PK id              |
+|    nombre          |       |    nombre          |
+|    ubicacion       |       |    apellido        |
+|    descripcion     |       |    email           |
+|    activo          |       |    telefono        |
+|    creado_en       |       |    activo          |
+|    actualizado_en  |       |    creado_en       |
++--------------------+       |    actualizado_en  |
+        |                    +--------------------+
+        |1                           |1
+        |                            |
+        |N                           |N
++--------------------+       +--------------------+
+|       items        |       |  asignacion_items  |
++--------------------+       +--------------------+
+| PK id              |       | PK id              |
+|    codigo          |       | FK usuario_id      |---> usuarios
+|    nombre          |       | FK item_id         |---> items
+|    descripcion     |       | FK deposito_id     |---> depositos
+|    cantidad        |       |    cantidad        |
+| FK deposito_id     |--+    |    estado          |
+|    activo          |  |    |    notas           |
+|    creado_en       |  |    |    asignado_en     |
+|    actualizado_en  |  |    |    actualizado_en  |
++--------------------+  |    +--------------------+
+                        |
+                        +----> depositos (FK)
+
+
+Estados posibles en asignacion_items:
+  pendiente | entregado | devuelto | cancelado
